@@ -1,0 +1,22 @@
+
+
+
+source repo:
+https://github.com/rccnw/NoiseEvent.git
+
+Azure App Service 
+
+project:
+https://portal.azure.com/#@rccpobox.onmicrosoft.com/resource/subscriptions/d88953c0-f714-4d10-9a08-62c775b88fc5/resourceGroups/NoiseEventResourceGroup/providers/Microsoft.Web/sites/NoiseEvent/appServices
+
+website:	
+https://noiseevent.azurewebsites.net/
+
+
+ASP Core Web app 2.1
+Web Application MVC
+Enable Docker support
+configure for HTTPS
+Individual User Accounts
+    - store user accounts in-app
+

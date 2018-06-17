@@ -12,17 +12,78 @@ using Microsoft.EntityFrameworkCore;
 using NoiseEvent.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using AutoMapper;
+using ApplicationCore.Configuration;
+using StringTokenFormatter;
+using System.Diagnostics;
+using System.Text;
+using ApplicationCore.Utilities;
+using Microsoft.Azure.KeyVault;
+using Microsoft.VisualBasic.CompilerServices;
+using System.Diagnostics;
+
+
 
 namespace NoiseEvent
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILogger<Startup> _logger;
+        public IConfiguration Configuration { get; }
+
+        public Startup(IHostingEnvironment env, IConfiguration configuration, ILogger<Startup> logger)
         {
             Configuration = configuration;
+
+
+            var pass = Configuration["SqlDbPassword"];
+
+
+            _logger = logger;
+
+            var builder = new ConfigurationBuilder();
+
+            builder.SetBasePath(env.ContentRootPath);
+
+            // Azure makes all the values of the app settings available as environment variables.
+            builder.AddEnvironmentVariables();
+
+            // You do not need to explicitly add appsettings.json in ASP.NET Core 2
+            // but to set the reloadOnChange property we do it anyway
+            builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            builder.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+            if (env.IsDevelopment())
+            {
+                // use 'secrets.json'  (See 'Manage User Secrets' right-click on Web project) 
+                builder.AddUserSecrets<Startup>();
+
+                builder.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            }
+
+
+            //var keyvault = new KeyVaultHelper();
+
+            if (env.IsProduction())
+            {
+            }
+
+            Configuration = builder.Build();
+
+            Debug.WriteLine("----------------------");
+            Debug.WriteLine("Configuration values :");
+            foreach (var item in configuration.AsEnumerable())
+            {
+                Configuration[item.Key] = item.Value;
+                Debug.WriteLine(item.Value);
+            }
+            Debug.WriteLine("----------------------");
+
         }
 
-        public IConfiguration Configuration { get; }
+ 
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -40,7 +101,10 @@ namespace NoiseEvent
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddSingleton<IKeyVaultHelper, KeyVaultHelper>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

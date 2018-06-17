@@ -1,0 +1,14 @@
+
+NoiseEvent Notes
+
+
+How to Store Secrets in Azure Key Vault Using .NET Core
+https://www.humankode.com/asp-net-core/how-to-store-secrets-in-azure-key-vault-using-net-core
+
+
+
+(Get-AzureKeyVaultSecret –VaultName “gvkeyvault” –Name “geoffv”).SecretValueText
+
+https://about-azure.com/2018/02/11/using-azure-key-vault-in-asp-net-core-2-0-with-the-options-pattern/
+
+

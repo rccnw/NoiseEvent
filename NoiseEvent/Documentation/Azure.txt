@@ -1,0 +1,64 @@
+
+
+
+
+
+
+
+Azure
+
+
+project:
+https://portal.azure.com/#@rccpobox.onmicrosoft.com/resource/subscriptions/d88953c0-f714-4d10-9a08-62c775b88fc5/resourceGroups/NoiseEventResourceGroup/providers/Microsoft.Web/sites/NoiseEvent/appServices
+
+website:	
+https://noiseevent.azurewebsites.net/
+
+
+
+
+created using template:	'App Service + SQL'
+
+SQL Db name:		NoiseEventDb
+Server Name:        NoiseEventSqlServer
+server admin login: NoiseEventAdmin
+password:           Gsts65shw@6%7
+Location:           West  US 2
+
+Free Level  5 DTUs 32 MB shared storage
+
+App Service Plan
+NoiseEventAPI20171019091016Plan(F1)
+
+KeyVault:
+
+Name:			NoiseEventKeyVault
+Resource Group:	NoiseEventResourceGroup
+Location:		West US 2
+Access Policy:	Principal:	Robert Campbell
+				NoiseEventApp (AD)
+
+
+Secrets:	(use Secrets for passwords)
+
+Name:			SqlDbPassword
+Secret Id:		https://noiseeventkeyvault.vault.azure.net/secrets/SqlDbPassword/e30c4d5f6fbb48bcb994a7bcfe86b234
+
+https://noiseeventkeyvault.vault.azure.net/
+
+
+(Get-AzureKeyVaultSecret –VaultName “noiseeventkeyvault” –Name “SqlDbPassword”).SecretValueText
+
+
+Active Directory
+
+Display name:				NoiseEventApp
+App ID:						c8a0a51b-d9e6-46b5-abba-cda619880e65
+
+Home page:					https://noiseevent.azurewebsites.net/
+Type:						Web App / API
+Managed app in local dir:	NoiseEventApp
+NoiseEventADKey:			ErMO6WryjzDIJELT0akByklTWXB22HQBpacwr0IIkjI=
+
+
+https://NoiseEventKeyVault.vault.azure.net/secrets/SqlDbPassword
