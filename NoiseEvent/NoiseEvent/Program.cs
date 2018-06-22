@@ -23,7 +23,7 @@ namespace NoiseEvent
 
                 CreateWebHostBuilder(args).Build().Run();
             }
-            catch (Exception ex)
+            catch (Exception /*ex*/)
             {
                 // NLog: catch setup errors
                // logger?.Error(ex, $"Stopped program because of exception. {ex.Message}");

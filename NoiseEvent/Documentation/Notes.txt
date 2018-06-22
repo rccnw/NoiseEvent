@@ -12,3 +12,521 @@ https://www.humankode.com/asp-net-core/how-to-store-secrets-in-azure-key-vault-u
 https://about-azure.com/2018/02/11/using-azure-key-vault-in-asp-net-core-2-0-with-the-options-pattern/
 
 
+
+
+=============================
+
+Notes from InformationDiusplays  June 19 2018
+
+
+
+
+https://informationdisplay-test-site-westus2.azurewebsites.net
+
+
+
+Azure resources:
+
+SQL Server
+	server name:	ACE-XIDS-POC
+	admin:  Xids
+	pwd:	****** 
+	West US 2
+
+	resource group:	ACE.XIDS.POC
+	subscription:	AirportCustomerExperience.DEV.TEST
+	server name:	ace-xids-poc.database.windows.net
+
+SQL DB
+	ACE-XIDS-POC
+	Connection string:
+		Server=tcp:ace-xids-poc.database.windows.net,1433;Initial Catalog=ACE-XIDS-POC;Persist Security Info=False;User ID=****;Password=*****;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+
+
+==============================================================================================
+
+ASP.NET CORE: THE MVC REQUEST LIFE CYCLE
+(diagram)
+http://www.techbloginterview.com/asp-net-core-the-mvc-request-life-cycle/
+
+
+Clean Architecture
+https://github.com/ardalis/CleanArchitecture
+
+
+Unit Testing Controllers
+Official ASP Core sample
+https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/testing
+
+The different types of software testing
+https://www.hanselman.com/blog/EasierFunctionalAndIntegrationTestingOfASPNETCoreApplications.aspx
+
+
+
+https://www.atlassian.com/continuous-delivery/different-types-of-software-testing
+
+React
+Templates for building React.js front-ends in ASP.NET Core and MVC5
+(this has a lot of general info about setting env up and tool selection)
+https://www.thereformedprogrammer.net/templates-for-building-react-front-ends-in-asp-net-core-and-mvc5/
+
+
+
+Developing Web Apps with ASP.NET Core 2.0 and React - Part 1 and 2
+(not ASP CORE)
+https://auth0.com/blog/developing-web-apps-with-asp-dot-net-core-2-dot-0-and-react-part-1/
+https://auth0.com/blog/developing-web-apps-with-asp-dot-net-core-2-dot-0-and-react-part-2/
+
+https://github.com/andychiare/netcore2-auth0
+
+
+
+
+React Testing
+
+	Jest
+		https://facebook.github.io/jest/ – Painless JavaScript Testing
+	Enzyme
+		https://github.com/airbnb/enzyme – JavaScript Testing utilities for React
+
+	https://www.red-gate.com/simple-talk/dotnet/asp-net/a-real-world-react-js-setup-for-asp-net-core-and-mvc5/
+
+	https://poznajprogramowanie.pl/security-issues-and-tests-in-asp-net-core-and-react-course/
+
+
+
+Configuration
+https://blogs.msdn.microsoft.com/premier_developer/2018/04/15/order-of-precedence-when-configuring-asp-net-core/
+
+
+User Secrets
+
+typical path:
+%APPDATA%\Roaming\Microsoft\UserSecrets\<user-secrets-id>\secrets.json
+contents:
+(replace '****' obfuscated fields)
+
+{
+  "dbuser": "****",
+  "dbpass": "*****",
+  "dbserver": "ace-xids-poc.database.windows.net",
+  "dbname" : "ACE-XIDS-POC",
+  "ConnectionString": "Data Source={dbserver};Initial Catalog={dbname};Persist Security Info=True;User ID={dbuser};Password={dbpass}"
+}
+
+https://blogs.msdn.microsoft.com/mihansen/2017/09/10/managing-secrets-in-net-core-2-0-apps/
+
+https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?tabs=visual-studio-code
+https://github.com/aspnet/Docs/blob/master/aspnetcore/security/app-secrets/sample/UserSecrets/Startup.cs
+https://www.red-gate.com/simple-talk/dotnet/asp-net/secrets-asp-net-core-user-secrets/
+
+Note: secrets change a bit after VS2017 
+https://github.com/aspnet/Announcements/issues/290
+
+EF Notes
+
+
+
+ASP.NET Core MVC with EF Core - Migrations 
+https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/
+https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-2.1
+
+
+Creating a Model
+https://docs.microsoft.com/en-us/ef/core/modeling/index
+
+Unit Test
+https://asp.net-hacker.rocks/2017/09/27/testing-aspnetcore.html
+
+DI
+https://long2know.com/2018/02/net-core-console-app-dependency-injection-and-user-secrets/
+
+
+dotnet ef migrations add DisplayDevice
+
+
+Unable to create an object of type 'InformationDisplayContext'. Add an implementation of 'IDesignTimeDbContextFactory<InformationDisplayContext>' to the project, 
+or see https://go.microsoft.com/fwlink/?linkid=851728 for additional patterns supported at design time.
+
+
+Azure Naming conventions
+	Naming conventions
+	https://docs.microsoft.com/en-us/azure/architecture/best-practices/naming-conventions
+
+Monitoring and Diagnostics
+	https://docs.microsoft.com/en-us/azure/architecture/best-practices/monitoring
+
+
+	NLog in ASP Core
+
+	https://github.com/nlog/NLog/wiki/Configuration-file
+
+
+	https://github.com/NLog/NLog.Web/wiki/Getting-started-with-ASP.NET-Core-2
+	https://honeycomb.io/blog/2018/01/simple-structured-logging-with-nlog/
+	http://edi.wang/post/2017/11/1/use-nlog-aspnet-20
+	https://github.com/damienbod/AspNetCoreNlog
+
+	NLog structured logging
+	https://github.com/NLog/NLog/wiki/How-to-use-structured-logging
+	https://honeycomb.io/blog/2018/01/simple-structured-logging-with-nlog/
+
+	https://ardalis.com/testing-logging-in-aspnet-core
+
+Caching
+
+	MS Caching Guidance
+	https://docs.microsoft.com/en-us/azure/architecture/best-practices/caching
+
+	Azure Redis Cache service : Redis is an open source NoSQL key-value database
+
+	Using Redis Cache for session data storage in ASP.NET Core
+	https://joonasw.net/view/redis-cache-session-store
+	choco install redis-64
+
+
+
+Windows Identity Foundation
+
+
+Filters
+	Filters run within the MVC action invocation pipeline, sometimes referred to as the filter pipeline. 
+	The filter pipeline runs after MVC selects the action to execute.
+
+		sample:	C:\Dev\Learn\Docs-master\Docs-master\aspnetcore\mvc\controllers\filters\sample
+
+
+	https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-2.1
+	https://andrewlock.net/asp-net-core-in-action-filters/
+		Authorization filters
+		Resource filters
+		Action filters
+			ActionFilter
+		Exception filters
+		Result filters
+
+
+
+JavaScript Services
+
+	JavaScriptServices is a set of client-side technologies for ASP.NET Core. It provides infrastructure that you'll find useful if you:
+
+	Use Angular / React / Vue / Aurelia / Knockout / etc.
+	Build your client-side resources using Webpack.
+	Execute JavaScript on the server at runtime.
+
+	https://github.com/aspnet/JavaScriptServices
+
+	https://docs.microsoft.com/en-us/aspnet/core/client-side/spa-services?view=aspnetcore-2.1
+
+	http://www.codingflow.net/getting-started-with-asp-net-core-javascript-services/
+
+	http://rion.io/2016/12/05/using-asp-net-core-javascript-services-to-play-nice-with-client-side-frameworks/
+	
+	https://skillsmatter.com/skillscasts/10494-javascript-services-building-single-page-applications-with-aspdot-net-core
+	https://www.srijan.net/frontend-javascript-ui-ux/javascript-services
+
+
+	https://github.com/aspnet/JavaScriptServices/tree/dev/samples/misc/Webpack
+
+AutoMapper
+
+https://www.codeproject.com/Articles/814869/AutoMapper-tips-and-tricks
+https://stackoverflow.com/questions/40275195/how-to-setup-automapper-in-asp-net-core
+https://lostechies.com/jimmybogard/2016/07/20/integrating-automapper-with-asp-net-core-di/
+
+
+
+Poly
+Polly is a .NET resilience and transient-fault-handling library that allows developers to express policies such as 
+Retry, Circuit Breaker, Timeout, Bulkhead Isolation, and Fallback in a fluent and thread-safe manner.
+https://github.com/App-vNext/Polly
+https://www.hanselman.com/blog/AddingCrossCuttingMemoryCachingToAnHttpClientFactoryInASPNETCoreWithPolly.aspx
+https://www.hanselman.com/blog/TheProgrammersHindsightCachingWithHttpClientFactoryAndPollyPart2.aspx
+
+
+
+Bundler & Minifier
+https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BundlerMinifier
+
+
+NPM
+
+https://www.npmjs.com/package/npm-check-updates
+npm install -g npm-check-updates
+ncu			// Show any new dependencies for the project in the current directory:
+ncu -u		// Upgrade a project's package file:
+
+
+SAAS
+
+The new main syntax (as of Sass 3) is known as “SCSS” (for “Sassy CSS”), and is a superset of CSS3's syntax. 
+This means that every valid CSS3 stylesheet is valid SCSS as well. SCSS files use the extension .scss. 
+The second, older syntax is known as the indented syntax (or just “Sass”)
+
+https://sass-lang.com/guide
+
+Less, Sass, and Font Awesome in ASP.NET Core
+https://docs.microsoft.com/en-us/aspnet/core/client-side/less-sass-fa?view=aspnetcore-2.1
+
+
+Fluent validation
+https://github.com/JeremySkinner/FluentValidation
+
+https://github.com/levelnis/FluentValidation.Specifications
+
+
+
+Configuration for Unit Tests
+
+How to use user secrets in a dotnet core test project
+https://stackoverflow.com/questions/41941503/how-
+
+to-use-user-secrets-in-a-dotnet-core-test-project
+
+
+
+
+
+
+
+
+	=====================================================================
+
+	scratch pad
+
+
+
+	#if DEBUG
+            _logger.LogInformation("HomeController Index page says hello");
+
+   //         TestDbAccess();
+#endif
+
+
+#if DEBUG
+        // TEMP DEBUG
+        private async void TestDbAccess()
+        {
+            await _service.CreateInformationDisplayAsync(
+                name: DateTime.Now.ToString(),
+                deviceId: "deviceId",
+                station: "station",
+                gate: "gate",
+                position: "position",
+                imageId: "imageId"
+            );
+
+          //  var list = await _service.GetAllInformationDisplaysAsync(); 
+
+        }
+
+#endif
+
+	<div class="row" style="margin-top:50px">
+
+    <img src="~/images/LIDS_AlaskaLogo.png" class="img-responsive"/>
+
+</div>
+
+<div class="row lids-font" style="margin-left: 150px; margin-top: 75px">
+    Position Closed
+</div>
+
+
+
+Key Vault
+
+https://docs.microsoft.com/en-us/azure/key-vault/key-vault-get-started
+
+Applications that use a key vault must authenticate by using a token from Azure Active Directory. To do this, the owner of the application must first register the application in their Azure Active Directory. At the end of registration, the application owner gets the following values:
+
+An Application ID
+An authentication key (also known as the shared secret).
+
+
+infodisplaytestkeyvault 
+InformationDisplays-Test-group-AirportCustomerExperience.DEV.TEST
+
+
+Application / Client ID
+dd1012e6-400a-4adb-bd4a-2d543a4f5d40
+
+InfoDsplyAuthKey :    	
+caSngTjbwlGDPGZMCPJaMbdzIH4Xmue7j7FVI6b/9iw=
+
+dbpass
+https://infodisplaytestkeyvault.vault.azure.net/secrets/dbpass/d4ab158de3d84150ad0bccecc7ea68fd
+
+asp source code:
+https://github.com/aspnet/MetaPackages/blob/dev/src/Microsoft.AspNetCore/WebHost.cs
+
+Program.cs in ASP.NET Core 2.0
+https://wildermuth.com/2017/07/06/Program-cs-in-ASP-NET-Core-2-0
+
+ASP.NET Core 2.0 Configuration Changes
+https://joonasw.net/view/aspnet-core-2-configuration-changes
+
+Exploring Program.cs, Startup.cs and CreateDefaultBuilder in ASP.NET Core 2 preview 1
+https://andrewlock.net/exploring-program-and-startup-in-asp-net-core-2-preview1-2/
+
+API Versioning
+https://github.com/Microsoft/aspnet-api-versioning/tree/master/samples/webapi/BasicWebApiSample
+https://github.com/Microsoft/aspnet-api-versioning/blob/master/samples/aspnetcore/BasicSample/web.config
+
+
+Some fun with Azure Key Vault REST API and HttpClient – Part 1
+http://thuansoldier.net/?p=7292
+
+Authenticating a Client Application with Azure Key Vault
+https://www.rahulpnath.com/blog/authenticating-a-client-application-with-azure-key-vault/
+
+https://docs.microsoft.com/en-us/azure/key-vault/key-vault-use-from-web-application
+
+Create a Web API with ASP.NET Core and Visual Studio for Windows
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-2.1
+
+
+Using URL versioning for ASP.NET webapi project created with .NET 4.5
+https://github.com/Microsoft/aspnet-api-versioning/issues/212
+
+
+How to Version Your Service
+https://github.com/Microsoft/aspnet-api-versioning/wiki/How-to-Version-Your-Service
+
+https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/test/WebSites/VersioningWebSite/VersionRoute.cs
+
+ASP.NET Core RESTful Web API versioning made easy
+https://www.hanselman.com/blog/ASPNETCoreRESTfulWebAPIVersioningMadeEasy.aspx
+
+
+extract keyvault secret ARM Template
+
+Use Azure Key Vault to pass secure parameter value during deployment
+https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-keyvault-parameter
+
+Microsoft.KeyVault/vaults template reference
+https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults
+
+Working with Azure App Services Application Settings and Connection Strings in ASP.NET Core
+https://blogs.msdn.microsoft.com/cjaliaga/2016/08/10/working-with-azure-app-services-application-settings-and-connection-strings-in-asp-net-core/
+
+Azure .NET Core Application Settings
+https://blogs.msdn.microsoft.com/jpsanders/2017/05/16/azure-net-core-application-settings/
+
+
+secrets Rob home 6-10-18
+
+{
+  "usersecret_dbuserTest": "Xids",
+  "usersecret_dbpassTest": "Station32",
+  "usersecret_dbserverTest": "ace-xids-poc.database.windows.net",
+  "usersecret_dbnameTest": "ACE-XIDS-POC",
+  "usersecret_SqlServerDbPassword": "DevT3s7$ql$vr$tati0n32",
+  "usersecret_SqlServerUserId": "infodisplay-test-user",
+  "usersecret_usetestdb": "false",
+  "usersecret_uselocaldb": "false",
+
+  "usersecret_dbuserLocalTest": "Xids",
+  "usersecret_dbpassLocalTest": "Station32",
+  "usersecret_dbserverLocalTest": "ace-xids-poc.database.windows.net",
+  "usersecret_dbnameLocalTest": "ACE-XIDS-POC"
+
+}
+
+
+
+
+
+Deploy your database to Azure SQL database using SQL scripts
+https://docs.microsoft.com/en-us/vsts/pipelines/apps/cd/deploy-database-sqlscripts?view=vsts
+
+Microsoft.Sql/servers/databases template reference
+https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/databases
+
+Tag Helpers in forms in ASP.NET Core
+https://docs.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-2.1
+
+Simplifying Development and Separating Concerns with MediatR
+https://blogs.msdn.microsoft.com/cdndevs/2016/01/26/simplifying-development-and-separating-concerns-with-mediatr/
+
+Developing with .NET on Microsoft Azure - Getting Started
+https://app.pluralsight.com/library/courses/developing-dotnet-microsoft-azure-getting-started/table-of-contents
+
+A library to run your business logic when using Entity Framework Core
+https://www.thereformedprogrammer.net/a-library-to-run-your-business-logic-when-using-entity-framework-core/
+
+https://www.thereformedprogrammer.net/using-in-memory-databases-for-unit-testing-ef-core-applications/
+
+Designing a DDD-oriented microservice
+https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/ddd-oriented-microservice
+
+
+http://mvc6-grid.azurewebsites.net/
+http://mvc6-grid.azurewebsites.net/Grid/ManualPaging
+https://github.com/NonFactors/MVC6.Grid
+https://github.com/NonFactors
+
+https://www.ag-grid.com/ag-grid-tutorials/
+
+
+=========================================
+Testing
+
+Building a Pragmatic Unit Test Suite
+https://app.pluralsight.com/library/courses/pragmatic-unit-testing/table-of-contents
+https://enterprisecraftsmanship.com/
+
+
+Output verification
+State verification
+Collaboration verification
+
+
+regression error
+false positive
+fast feedback
+
+Functional style 
+	- best protection against false positives
+	- only suitable for functional code
+
+	Function input:  immutable
+	Collaborator:   maintains state
+
+State verification
+	good protection against false positives
+	should verify through the public API
+
+	Don't extend public API just to satisfy a test - code smell
+
+Collaboration verification
+	- 2 types of communication, inside or outside 'hexagon'
+	inside
+		- implementation detail
+		- lots of false positives
+	outside
+		- part of public API
+
+		
+wrap external services with own gateways
+
+Use test doubles only for types I create
+
+Black box
+White Box
+	- test internal structure
+
+
+Tests verify business requirement
+BDD
+
+
+view from end user's perspective
+verify observable behavior
+
+Public API?
+ - used by code from outside layer
+ - addreses an immediate goal of client code
+ - yields full result in one go
+

@@ -15,14 +15,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using AutoMapper;
-using ApplicationCore.Configuration;
+using ApplicationCore.AppConfiguration;
 using StringTokenFormatter;
 using System.Diagnostics;
 using System.Text;
 using ApplicationCore.Utilities;
 using Microsoft.Azure.KeyVault;
 using Microsoft.VisualBasic.CompilerServices;
-using System.Diagnostics;
+
+
 
 
 
@@ -88,6 +89,11 @@ namespace NoiseEvent
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.Configure<ApplicationCore.AppConfiguration.LogSettings>(Configuration.GetSection("LogSettings"));
+            services.Configure<ApplicationCore.AppConfiguration.AppSettings>(Configuration.GetSection("AppConfiguration"));
+
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -104,7 +110,24 @@ namespace NoiseEvent
             services.AddSingleton<IKeyVaultHelper, KeyVaultHelper>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //services
+            //    .AddMvcCore()
+            //    .AddJsonFormatters()
+            //    .AddApiExplorer()
+            //    .AddAuthorization()
+            //    .AddCors();
+
             services.AddAutoMapper(typeof(Startup));
+
+
+
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            //});
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,6 +144,8 @@ namespace NoiseEvent
                 app.UseHsts();
             }
 
+            app.UseStatusCodePages();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -133,6 +158,13 @@ namespace NoiseEvent
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //app.UseSwagger();       // {yourBaseUrl}/swagger/v1/swagger.json
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            //});
+
         }
     }
 }
