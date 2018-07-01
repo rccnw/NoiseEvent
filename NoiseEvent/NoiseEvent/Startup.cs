@@ -56,6 +56,11 @@ namespace NoiseEvent
             builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             builder.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
+     //       loggerFactory.AddConsole();
+        //    loggerFactory.AddDebug()
+
+
+
             if (env.IsDevelopment())
             {
                 // use 'secrets.json'  (See 'Manage User Secrets' right-click on Web project) 
@@ -70,6 +75,9 @@ namespace NoiseEvent
             if (env.IsProduction())
             {
             }
+
+            //       app.UseStaticFiles();
+            // app.UseStatusCodePages();
 
             Configuration = builder.Build();
 
