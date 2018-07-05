@@ -1,0 +1,17 @@
+
+
+Options pattern in ASP.NET Core
+https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-2.1
+
+Easy Configuration Binding in ASP.NET Core - revisited
+https://weblog.west-wind.com/posts/2017/Dec/12/Easy-Configuration-Binding-in-ASPNET-Core-revisited
+The good news is that the configuration engine is very flexible and provides a number of different ways to get at configuration objects.
+
+Raw Configuration[path:key]
+IOptions<T> binding to a Config Section
+Configuration.Bind() to bind to a Config Section
+Static Props if you want it
+
+
+
+

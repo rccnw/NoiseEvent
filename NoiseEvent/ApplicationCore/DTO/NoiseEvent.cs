@@ -8,6 +8,7 @@ namespace ApplicationCore.DTO
 {
     public class NoiseEvent
     {
-        
+        public string Description { get; set; }
+        public string Location { get; set; }
     }
 }

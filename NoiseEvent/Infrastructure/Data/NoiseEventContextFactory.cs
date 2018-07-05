@@ -35,13 +35,9 @@ namespace Infrastructure.Data
             {
                 var optionsBuilder = new DbContextOptionsBuilder<NoiseEventContext>();
 
-                // this is for a 'test' db on Azure
-                var connectionString = "Data Source=ace-xids-poc.database.windows.net;Initial Catalog=ACE-XIDS-POC;Persist Security Info=True;User ID=Xids;Password=Station32";
-
-
-                // this should be the 'real' DB on azure - (at least for TEST env)  - this value was copied from AppService ConnectionStrings property
-                //var connectionString = "Data Source=infodisplay-test-sqlsvr-1.database.windows.net;Initial Catalog=infodisplay-test-sqldb-1;Persist Security Info=True;User ID=infodisplay-test-user;Password=****;";
-
+                // localDb
+               // var connectionString = "Server=(localdb)\\mssqllocaldb;Database=NoiseEvent;Trusted_Connection=True;Integrated Security=True;MultipleActiveResultSets=true";
+                var connectionString = "Data Source=tcp:noiseeventsqlserver.database.windows.net,1433;Initial Catalog=NoiseEventDb;User Id=NoiseEventAdmin@noiseeventsqlserver.database.windows.net;Password=Gsts65shw@6%7;";
                 optionsBuilder.UseSqlServer(connectionString);
 
                 return new NoiseEventContext(optionsBuilder.Options);

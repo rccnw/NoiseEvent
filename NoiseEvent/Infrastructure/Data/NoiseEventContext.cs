@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging.Console;
 using ApplicationCore.Entities;
 
 namespace Infrastructure.Data
-{
+{    
     public class NoiseEventContext : DbContext
     {
         // use built in logging feature to capture SQL commands to console
@@ -29,8 +29,8 @@ namespace Infrastructure.Data
         {
             optionsBuilder.UseLoggerFactory(MyConsoleLoggerFactory);
 
-            var connectionString = "Server = (localdb)\\mssqllocaldb; Database = NoiseEvent; Trusted_Connection = True";
-            optionsBuilder.UseSqlServer(connectionString);
+            //var connectionString = "Server = (localdb)\\mssqllocaldb; Database = NoiseEvent; Trusted_Connection = True";
+            //optionsBuilder.UseSqlServer(connectionString);
             //base.OnConfiguring(optionsBuilder);
         }
 

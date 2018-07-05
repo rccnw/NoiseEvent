@@ -157,21 +157,6 @@ Monitoring and Diagnostics
 	https://docs.microsoft.com/en-us/azure/architecture/best-practices/monitoring
 
 
-	NLog in ASP Core
-
-	https://github.com/nlog/NLog/wiki/Configuration-file
-
-
-	https://github.com/NLog/NLog.Web/wiki/Getting-started-with-ASP.NET-Core-2
-	https://honeycomb.io/blog/2018/01/simple-structured-logging-with-nlog/
-	http://edi.wang/post/2017/11/1/use-nlog-aspnet-20
-	https://github.com/damienbod/AspNetCoreNlog
-
-	NLog structured logging
-	https://github.com/NLog/NLog/wiki/How-to-use-structured-logging
-	https://honeycomb.io/blog/2018/01/simple-structured-logging-with-nlog/
-
-	https://ardalis.com/testing-logging-in-aspnet-core
 
 Caching
 
@@ -182,6 +167,11 @@ Caching
 
 	Using Redis Cache for session data storage in ASP.NET Core
 	https://joonasw.net/view/redis-cache-session-store
+
+	How To Create an Azure Redis Cache
+	https://codingwithcookie.com/2018/04/09/how-to-create-an-azure-redis-cache/
+
+
 	choco install redis-64
 
 

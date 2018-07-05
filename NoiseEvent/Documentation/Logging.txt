@@ -1,0 +1,58 @@
+
+SeriLog
+https://github.com/serilog/serilog-aspnetcore
+https://github.com/serilog/serilog-settings-configuration
+https://github.com/serilog/serilog-sinks-applicationinsights
+
+
+
+Logging
+	Logging in ASP.NET Core
+	https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1
+
+	SeriLog
+
+	https://github.com/serilog/serilog-aspnetcore
+	https://github.com/serilog/serilog/wiki/Writing-Log-Events
+	https://github.com/serilog/serilog-settings-configuration
+	https://github.com/serilog/serilog-sinks-applicationinsights
+	https://itnext.io/loggly-in-asp-net-core-using-serilog-dc0e2c7d52eb
+
+	Net Core 2 Serilog inject from Console App to Webhost
+	https://stackoverflow.com/questions/51115007/net-core-2-serilog-inject-from-console-app-to-webhost
+
+	How to properly configure for ASP.NET Core 2 and Azure App Service
+	https://github.com/serilog/serilog-sinks-applicationinsights/issues/37
+
+
+
+
+	NLog in ASP Core
+
+	https://github.com/nlog/NLog/wiki/Configuration-file
+
+
+	https://github.com/NLog/NLog.Web/wiki/Getting-started-with-ASP.NET-Core-2
+	https://honeycomb.io/blog/2018/01/simple-structured-logging-with-nlog/
+	http://edi.wang/post/2017/11/1/use-nlog-aspnet-20
+	https://github.com/damienbod/AspNetCoreNlog
+
+	NLog structured logging
+	https://github.com/NLog/NLog/wiki/How-to-use-structured-logging
+	https://honeycomb.io/blog/2018/01/simple-structured-logging-with-nlog/
+
+	https://ardalis.com/testing-logging-in-aspnet-core
+
+Loggly
+	https://itnext.io/loggly-in-asp-net-core-using-serilog-dc0e2c7d52eb
+
+
+
+	Overview of Azure Monitor  /  Application Insights
+https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/monitoring-overview-azure-monitor
+
+
+
+https://docs.microsoft.com/en-us/azure/application-insights/app-insights-asp-net
+
+https://codingwithcookie.com/2017/08/01/application-insights-with-nlog/

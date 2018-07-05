@@ -4,6 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ApplicationCore.Interfaces;
+using ApplicationCore.Logging;
+using Microsoft.Extensions.Logging;
+using ApplicationCore.Exceptions;
 
 namespace NoiseEvent.Controllers
 {
@@ -12,6 +16,45 @@ namespace NoiseEvent.Controllers
     [ApiController]
     public class NoiseEventController : ControllerBase
     {
+
+        private readonly INoiseEventService _noiseEventService;
+        private readonly ILogger<NoiseEventController> _logger;
+        private readonly IApplicationInsightsLogger _applicationInsightsLogger;
+
+        public NoiseEventController(
+            INoiseEventService noiseEventService,       // application service : provides access to business rules and data repository
+            ILogger<NoiseEventController> logger,
+            IApplicationInsightsLogger applicationInsightsLogger)
+        {
+            _noiseEventService = noiseEventService;
+            _logger = logger;
+            _applicationInsightsLogger = applicationInsightsLogger;
+        }
+
+
+        // [HttpGet("{id}", Name = "NoiseData")]
+
+        //public async Task<IActionResult> GetAllAsync(Guid id)
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                var noiseData = await _noiseEventService.GetAllNoiseEventsAsync(); // application service layer 
+                return Ok(noiseData);
+            }
+            catch (EventNotFoundException ex)
+            {
+                //var properties = new Dictionary<string, string>
+                //{
+                //   {"Display Id: ", id.ToString()}
+                //};
+                //_applicationInsightsLogger.TrackException(ex, properties);
+               // _logger.LogError($"NoiseEventController.GetByIdAsync - GetByIdAsync failed - id:  {id}");
+                return NotFound();
+            }
+        }
+
 
 #if NADA
         private INoiseEventRepository _noiseEventRepository;

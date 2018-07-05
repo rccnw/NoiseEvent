@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 
 namespace Infrastructure.Data
@@ -13,11 +17,19 @@ namespace Infrastructure.Data
 
     public class NoiseEventRepository : EfRepository<NoiseEventEntity>, INoiseEventRepository
     {
-        public NoiseEventRepository(NoiseEventContext dbContext) : base(dbContext)
+        private readonly IConfiguration _configuration;
+        private readonly ILogger<NoiseEventRepository> _logger;
+
+
+        public NoiseEventRepository(
+           NoiseEventContext dbContext,            // base class stores this
+           ILogger<NoiseEventRepository> logger,
+           IConfiguration configuration)
+           : base(dbContext)
         {
         }
 
-        public NoiseEventEntity GetByDisplayId(Guid id)
+        public NoiseEventEntity GetByNoiseEventId(Guid id)
         {
             // TODO use Guid
             return _dbContext.NoiseEvent.FirstOrDefault();

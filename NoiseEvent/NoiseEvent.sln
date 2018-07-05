@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 	ProjectSection(SolutionItems) = preProject
 		Documentation\About.txt = Documentation\About.txt
 		Documentation\Azure.txt = Documentation\Azure.txt
+		Documentation\Configuration.txt = Documentation\Configuration.txt
 		Documentation\EF.txt = Documentation\EF.txt
+		Documentation\Logging.txt = Documentation\Logging.txt
 		Documentation\Notes.txt = Documentation\Notes.txt
 	EndProjectSection
 EndProject

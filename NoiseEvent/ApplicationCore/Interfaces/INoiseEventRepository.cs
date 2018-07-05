@@ -15,6 +15,6 @@ namespace ApplicationCore.Interfaces
         //DisplayEntity GetById(Guid id);
 
         //Task<NoiseEventEntity> GetByDisplayIdAsync(Guid id);
-        NoiseEventEntity GetByDisplayId(Guid id);
+        NoiseEventEntity GetByNoiseEventId(Guid id);
     }
 }

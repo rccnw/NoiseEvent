@@ -1,57 +1,85 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
+
+
+
 
 namespace NoiseEvent
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true)
+            .AddEnvironmentVariables()
+            .Build();
+
+        public static int Main(string[] args)
         {
 
 
             try
             {
+                Log.Logger = new LoggerConfiguration()
+                //.MinimumLevel.Debug()
+                //.MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .ReadFrom.Configuration(Configuration)
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateLogger();
+
+                Log.Information("NoiseEvent Program.Main starting...");
+
                 //logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
                 //logger.Debug("init main");
 
                 CreateWebHostBuilder(args).Build().Run();
+                return 0;
             }
-            catch (Exception /*ex*/)
+            catch (Exception ex)
             {
-                // NLog: catch setup errors
-               // logger?.Error(ex, $"Stopped program because of exception. {ex.Message}");
-                throw;
+                Log.Fatal(ex, "Host terminated unexpectedly");
+                return 1;
             }
             finally
             {
-                // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
-                //NLog.LogManager.Shutdown();
+                Log.CloseAndFlush();
             }
 
 
         }
 
+        // simple default version of CreateWebHostBuilder
         //public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        //    WebHost.CreateDefaultBuilder(args)
+        //    WebHost.CreateDefaultBuilder(args)    
         //        .UseStartup<Startup>();
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+            
 
-                .ConfigureAppConfiguration((context, config) =>
+                .ConfigureLogging((hostingContext, config) =>
                 {
+                    config.ClearProviders();
+                })
+                .ConfigureAppConfiguration((context, config) =>
+                {       
+                    var env = context.HostingEnvironment;
 
                     config.SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile("appsettings.json", optional: false)
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)    
                         //  .AddJsonFile("azurekeyvault.json", false, true)
                         .AddEnvironmentVariables();
+
+
+
 
                     var builtConfig = config.Build();
 
@@ -77,6 +105,18 @@ namespace NoiseEvent
 
                 })
 
+
+
+
+                //.ConfigureLogging((hostingContext, logging) =>
+                //{
+                //    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                //    logging.AddConsole();
+                //    logging.AddDebug();
+                //    logging.ClearProviders();
+                //    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+                //})
+
                 //.ConfigureAppConfiguration((ctx, builder) =>
                 //    {
                 //       // var token = new KeyVaultToken();
@@ -97,15 +137,10 @@ namespace NoiseEvent
 
 
 
-
+                //.UseConfiguration(Configuration)
 
                 .UseStartup<Startup>() // Specify the Startup class 
-                .ConfigureLogging(logging =>
-                {
-                    logging.ClearProviders();
-                    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-                })
-              //  .UseNLog()
+                .UseSerilog()       
             ;  
     }
 }
